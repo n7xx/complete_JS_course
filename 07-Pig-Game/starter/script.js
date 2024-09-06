@@ -184,4 +184,3 @@ const handleNewGame = function () {
 rollBtn.addEventListener('click', handleRollDice);
 holdBtn.addEventListener('click', handleHoldScore);
 newBtn.addEventListener('click', handleNewGame);
- cons
