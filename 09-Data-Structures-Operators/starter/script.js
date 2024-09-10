@@ -58,7 +58,7 @@ console.log(true || false);
 // the first truthy value 
 console.log(undefined || 0 || '' || 23 || 'hello' || null);
 
-restaurant.numGuests = 23;
+restaurant.numGuests = 0;
 const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
 console.log(guests1);
 
@@ -70,6 +70,10 @@ console.log(0 && 'nashhaat');
 console.log(true && 'nashhaat');
 console.log(5 && 'nashhaat');
 console.log('nashaat' && 23 && null && 'fathy' && 'hello' && null);
+
+// Nullish: null and undifined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
 
 /* // Spread, because on Right side of '='
 const arr = [1, 2, ...[3, 4]];
