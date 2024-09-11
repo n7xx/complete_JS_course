@@ -224,8 +224,100 @@ const books = [
   },
 ];
 
+// Assignment #10
+// 10.1
+const getFirstKeyword = function (book) {
+  return book.keywords?.[0];
+};
 
+console.log(getFirstKeyword(books[0]));
 
+// Assignment #9
+//9.1
+const bookData = [
+  ["title", "Computer Networking: A Top-Down Approach"],
+  ["author", ["James F. Kurose", "Keith W. Ross"]],
+  ["publisher", "Addison Wesley"],
+];
+
+// Do the rest
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+// 9.2
+const pages = 880;
+
+const newBook2 = {
+  title: "The C Programming Language",
+  author: ["Brian W. Kernighan", "Dennis M. Ritchie"],
+  // ...
+  pages,
+};
+
+// Assignment #8
+// 8.1
+let pagesSum = 0;
+for (const book of books) {
+  pagesSum += book.pages;
+}
+console.log(pagesSum);
+
+// 8.2
+const allAuthors = [];
+for (const book of books) {
+  if (typeof book.author === "string") {
+    allAuthors.push(book.author);
+  } else {
+    for (const author of book.author) {
+      allAuthors.push(author);
+    }
+  }
+}
+
+// 8.3
+for (const [i, author] of allAuthors.entries()) {
+  console.log(`${i + 1}: ${author}`);
+}
+// Assignment #7
+
+// 7.1
+for (let i = 0; i < books.length; i++) {
+  // code
+  console.log((books[i].edition ||= 1));
+}
+
+// 7.2
+for (let i = 0; i < books.length; i++) {
+  // code
+  console.log(
+    (books[i].highlighted &&= !books[i].thirdParty.goodreads.rating < 4.2)
+  );
+}
+
+// Assignment #6
+//6.1
+for (let i = 0; i < books.length; i++) {
+  // code
+  books[i].onlineContent ??
+    console.log(`"${books[i].title}" 
+      Provides no data about its online content`);
+}
+
+// Assignment #5
+
+//5.1
+const hasExampleJava = function (book) {
+  return book.programmingLanguage === "Java" || "No data available";
+};
+console.log(hasExampleJava(books[2]));
+// 5.2
+for (let i = 0; i < books.length; i++) {
+  // code
+  books[i].onlineContent &&
+    console.log(`"${books[i].title}" Provides online content`);
+}
 // Assignment #4
 
 // 4.1
@@ -236,10 +328,11 @@ const { publicationDate: bookPuplisher, ...restOftheBook } = books[1];
 console.log(bookPuplisher);
 // 4.3
 const printBookAuthorsCount = function (title, ...authors) {
-  console.log(`The Book "${title}" has ${authors.length} Authors. They are "${authors}"`);
+  console.log(
+    `The Book "${title}" has ${authors.length} Authors. They are "${authors}"`
+  );
 };
 printBookAuthorsCount("Algorithms", "Robert Sedgewick", " Kevin Wayne");
-
 
 // Assignment #3
 
@@ -304,3 +397,110 @@ console.log(rating, ratingsCount);
 const ratingStars = [63405, 1808];
 const [fiveStarRatings, oneStarRating, threeStarRating = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRating, threeStarRating);
+
+// Material of coding challenges
+const game = {
+  team1: "liverPool",
+  team2: "ManCity",
+  players: [
+    [
+      "Alisson Becker",
+      "Trent Alexander-Arnold",
+      "Virgil van Dijk",
+      "Andy Robertson",
+      "Fabinho",
+      "Thiago Alcantara",
+      "Jordan Henderson",
+      "Mohamed Salah",
+      "Sadio Mane",
+      "Roberto Firmino",
+      "Diogo Jota",
+    ],
+    [
+      "Ederson",
+      "Kyle Walker",
+      "Ruben Dias",
+      "John Stones",
+      "Joao Cancelo",
+      "Rodri",
+      "Kevin De Bruyne",
+      "Ilkay Gundogan",
+      "Bernardo Silva",
+      "Raheem Sterling",
+      "Erling Haaland",
+    ],
+  ],
+  score: "4:0",
+  scored: [
+    "Mohamed Salah",
+    "Roberto Firmino",
+    "Virgil van Dijk",
+    "Mohamed Salah",
+  ],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// Coding Challenge #2
+
+// 1
+for (const [index, name] of game.scored.entries()) {
+  console.log(`Goal ${index + 1}: ${name}`);
+}
+//2 
+let avrage = 0;
+const values = Object.values(game.odds);
+for (const value of values) avrage += value;
+avrage /= values.length;
+console.log(avrage);
+
+// 3 
+for (const [key, value] of Object.entries(game.odds)) {
+  let str = key === "x" ? "Draw" : `victory ${game[key]}`;
+  console.log(`Odd of ${str}: ${value}`);
+}
+
+// BOUNS 4
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+// Coding Challenge #1
+// 1.
+/* const [players1, players2] = game.players;
+console.log(players1, players2);
+
+// 2.
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+// 3.
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+// 4.
+const players1Final = [...players1, "Thiago", "Coutinho", "Periscic"];
+
+// 5.
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+console.log(team1, draw, team2);
+
+// 6.
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`${players.length} goals were scored`);
+};
+
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals('Davies', 'Muller');
+printGoals(...game.scored);
+
+// 7.
+team1 < team2 && console.log("Team 1 is more likely to win");
+team1 > team2 && console.log("Team 2 is more likely to win"); */
