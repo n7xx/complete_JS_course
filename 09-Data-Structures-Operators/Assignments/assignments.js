@@ -294,7 +294,8 @@ for (let i = 0; i < books.length; i++) {
   console.log(
     (books[i].highlighted &&= !books[i].thirdParty.goodreads.rating < 4.2)
   );
-}
+} 
+
 
 // Assignment #6
 //6.1
@@ -444,21 +445,61 @@ const game = {
     team2: 6.5,
   },
 };
+const gameEvents = new Map([
+  [17, "⚽ GOAL"],
+  [36, "� Substitution"],
+  [47, "⚽ GOAL"],
+  [61, "� Substitution"],
+  [64, "� Yellow card"],
+  [69, "� Red card"],
+  [70, "� Substitution"],
+  [72, "� Substitution"],
+  [76, "⚽ GOAL"],
+  [80, "⚽ GOAL"],
+  [92, "� Yellow card"],
+]);
 
+// Challange #3
+
+// 1 Create an array 'events' of the different game events that happened (no duplicates);
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+// 2. After the game has finished, is was found that the yellow card from minute 64
+// was unfair. So remove this event from the game events log
+// console.log(gameEvents.get(64));
+gameEvents.delete(64);
+
+/* 3. Compute and log the following string to the console: "An event happened, on
+average, every 9 minutes" (keep in mind that a game has 90 minutes) */
+
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+const time = [...gameEvents.keys()].pop();
+console.log(time);
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+for (const [time, event] of gameEvents) {
+  const half = time <= 45 ? 'First' : 'Second';
+  console.log(`${half} Half in minute ${time}: ${event}`);
+}
 // Coding Challenge #2
 
 // 1
 for (const [index, name] of game.scored.entries()) {
   console.log(`Goal ${index + 1}: ${name}`);
 }
-//2 
+//2
 let avrage = 0;
 const values = Object.values(game.odds);
 for (const value of values) avrage += value;
 avrage /= values.length;
 console.log(avrage);
 
-// 3 
+// 3
 for (const [key, value] of Object.entries(game.odds)) {
   let str = key === "x" ? "Draw" : `victory ${game[key]}`;
   console.log(`Odd of ${str}: ${value}`);
