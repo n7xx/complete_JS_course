@@ -202,7 +202,7 @@ const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
 // Using the arrow function to greet
 greetArrow('Hello')('Nashaat From Arrow'); // Output: Hello Nashaat From Arrow */
 
-// Object representing Lufthansa airline with a method to book a flight
+/* // Object representing Lufthansa airline with a method to book a flight
 const lufthansa = {
   airline: 'Lufthansa',
   iataCode: 'LH',
@@ -342,4 +342,87 @@ document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-  poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+const runOnece = function () {
+  console.log('This will never run again');
+};
+
+runOnece();
+
+// IIFE
+(function () {
+  console.log('This will never run again');
+})();
+
+(() => console.log('This will also never run again'))();
+
+{
+  const isprivet = 23;
+  var notPrivete = 46;
+}
+
+console.log(notPrivete);
+
+const secureBook = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBook();
+booker();
+
+console.dir(booker);
+ */
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 976;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g(); // first called and gave f access to (a) variable
+f();
+console.dir(f);
+// Re-assigning  f funciton
+h();
+f();
+
+console.dir(f);
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(() => {
+    console.log(`We Are now boarding all ${n} passengers`);
+    console.log(`there are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+  console.log(`will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000;
+boardPassengers(180, 3);
+
+
+// Coding Challenge #2
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  })
+})(); 
+
